@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/course_selection_system</property>
+        <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+
+        <!-- 是否在控制台显示sql语句 -->
+        <property name="show_sql">true</property>
+        <!-- 是否格式化显示的sql语句 -->
+        <property name="format_sql">true</property>
+        <!-- 是否自动生成数据表的策略,create代表每次启动程序都重新创建数据表 -->
+        <property name="hbm2ddl.auto">update</property>
+
+
+        <mapping resource="entity/CourseSelectionTbEntity.hbm.xml"/>
+        <mapping class="entity.CourseSelectionTbEntity"/>
+        <mapping resource="entity/CourseTbEntity.hbm.xml"/>
+        <mapping class="entity.CourseTbEntity"/>
+        <mapping resource="entity/DeptTbEntity.hbm.xml"/>
+        <mapping class="entity.DeptTbEntity"/>
+        <mapping resource="entity/MajorTbEntity.hbm.xml"/>
+        <mapping class="entity.MajorTbEntity"/>
+        <mapping resource="entity/ManagerTbEntity.hbm.xml"/>
+        <mapping class="entity.ManagerTbEntity"/>
+        <mapping resource="entity/StuTbEntity.hbm.xml"/>
+        <mapping class="entity.StuTbEntity"/>
+        <mapping resource="entity/TeacherTbEntity.hbm.xml"/>
+        <mapping class="entity.TeacherTbEntity"/>
+
+        <!-- DB schema will be updated if needed -->
+        <!-- <property name="hbm2ddl.auto">update</property> -->
+    </session-factory>
+</hibernate-configuration>

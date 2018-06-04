@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="entity.TeacherTbEntity" table="teacher_tb" schema="course_selection_system">
+        <id name="teacherId">
+            <column name="teacher_id" sql-type="int(11)"/>
+        </id>
+        <property name="teacherName">
+            <column name="teacher_name" sql-type="varchar(45)" length="45"/>
+        </property>
+        <property name="teacherSex">
+            <column name="teacher_sex" sql-type="char(1)" length="1"/>
+        </property>
+        <property name="teacherTitle">
+            <column name="teacher_title" sql-type="varchar(45)" length="45"/>
+        </property>
+        <property name="teacherPasswd">
+            <column name="teacher_passwd" sql-type="varchar(45)" length="45"/>
+        </property>
+    </class>
+</hibernate-mapping>
