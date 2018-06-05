@@ -15,7 +15,7 @@ public class StuDAOImpl implements StuDAO {
     }
     @Override
     public StuTbEntity getStuByID(int id) {
-        String hql = "from StuTbEntity s where s.id = ? ";
+        String hql = "from StuTbEntity s where s.stuId = ? ";
         Query query = sessionFactory.getCurrentSession().createQuery(hql);
         query.setParameter(0,id);
         return (StuTbEntity) query.uniqueResult();
@@ -23,15 +23,15 @@ public class StuDAOImpl implements StuDAO {
 
     @Override
     public List<StuTbEntity> getStuByName(String name) {
-        String hql = "from StuTbEntity s where s.stuName = ? ";
+        String hql = "from StuTbEntity s where s.stuName like ? ";
         Query query = sessionFactory.getCurrentSession().createQuery(hql);
-        query.setParameter(0,name);
+        query.setParameter(0,"%"+name+"%");
         return query.list();
     }
 
     @Override
     public List<StuTbEntity> getAllStu() {
-        String hql = "from StuTbEntity order by id desc";
+        String hql = "from StuTbEntity order by stuId desc";
         Query query = sessionFactory.getCurrentSession().createQuery(hql);
         return query.list();
 
@@ -44,7 +44,7 @@ public class StuDAOImpl implements StuDAO {
 
     @Override
     public void delStu(int id) {
-        String hql = "delete from StuTbEntity s where s.id = ?";
+        String hql = "delete from StuTbEntity s where s.stuId = ?";
         Query query = sessionFactory.getCurrentSession().createQuery(hql);
         query.setParameter(0,id);
     }
