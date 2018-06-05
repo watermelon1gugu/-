@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "course_selection_tb", schema = "course_selection_system", catalog = "")
+@Table(name = "course_selection_tb", schema = "course_selection_system")
 public class CourseSelectionTbEntity {
     private int stuCourseId;
     private short grade;
