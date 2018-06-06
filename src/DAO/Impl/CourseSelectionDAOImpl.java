@@ -7,8 +7,6 @@ import org.hibernate.query.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import entity.CourseSelectionTbEntity;
-
 
 public class CourseSelectionDAOImpl implements CourseSelectionDAO {
     private final SessionFactory sessionFactory;

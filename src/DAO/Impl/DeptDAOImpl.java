@@ -58,4 +58,5 @@ public class DeptDAOImpl implements DeptDAO {
     public void updateDept(DeptTbEntity dept) {
         sessionFactory.getCurrentSession().update(dept);
     }
+
 }

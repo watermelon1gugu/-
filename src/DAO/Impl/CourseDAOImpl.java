@@ -57,4 +57,9 @@ public class CourseDAOImpl implements CourseDAO {
     public void updateCourse(CourseTbEntity course) {
         sessionFactory.getCurrentSession().update(course);
     }
+
+    @Override
+    public SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
 }
