@@ -2,6 +2,7 @@ package DAO.Impl;
 
 import DAO.StuDAO;
 import entity.StuTbEntity;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
@@ -16,41 +17,54 @@ public class StuDAOImpl implements StuDAO {
     @Override
     public StuTbEntity getStuByID(int id) {
         String hql = "from StuTbEntity s where s.stuId = ? ";
-        Query query = sessionFactory.getCurrentSession().createQuery(hql);
+        Session session = sessionFactory.openSession();
+        Query query = session.createQuery(hql);
         query.setParameter(0,id);
-        return (StuTbEntity) query.uniqueResult();
+        StuTbEntity stuTbEntity = (StuTbEntity) query.uniqueResult();
+        session.close();
+        return stuTbEntity;
     }
 
     @Override
     public List<StuTbEntity> getStuByName(String name) {
         String hql = "from StuTbEntity s where s.stuName like ? ";
-        Query query = sessionFactory.getCurrentSession().createQuery(hql);
+        Session session = sessionFactory.openSession();
+        Query query = session.createQuery(hql);
         query.setParameter(0,"%"+name+"%");
-        return query.list();
+        List list = query.list();
+        session.close();
+        return list;
     }
 
     @Override
     public List<StuTbEntity> getAllStu() {
         String hql = "from StuTbEntity order by stuId desc";
-        Query query = sessionFactory.getCurrentSession().createQuery(hql);
-        return query.list();
+        Session session = sessionFactory.openSession();
+        Query query = session.createQuery(hql);
+        List list = query.list();
+        session.close();
+        return list;
 
     }
 
     @Override
     public void addStu(StuTbEntity stu) {
-        sessionFactory.getCurrentSession().persist(stu);
+        Session session = sessionFactory.openSession();
+        session.persist(stu);
     }
 
     @Override
     public void delStu(int id) {
         String hql = "delete from StuTbEntity s where s.stuId = ?";
-        Query query = sessionFactory.getCurrentSession().createQuery(hql);
+        Session session = sessionFactory.openSession();
+        Query query = session.createQuery(hql);
         query.setParameter(0,id);
+        session.close();
     }
 
     @Override
     public void updateStu(StuTbEntity stu) {
-        sessionFactory.getCurrentSession().update(stu);
+        Session session = sessionFactory.openSession();
+        session.update(stu);
     }
 }

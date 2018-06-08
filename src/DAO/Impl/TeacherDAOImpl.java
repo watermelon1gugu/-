@@ -3,6 +3,7 @@ package DAO.Impl;
 import java.util.List;
 
 import DAO.TeacherDAO;
+import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -19,42 +20,56 @@ public class TeacherDAOImpl implements TeacherDAO {
     @Override
     public TeacherTbEntity getTeacherByID(int id) {
         String hql = "from TeacherTbEntity s where s.teacherId = ? ";
-        Query query = sessionFactory.getCurrentSession().createQuery(hql);
+        Session session = sessionFactory.openSession();
+        Query query = session.createQuery(hql);
         query.setParameter(0, id);
-        return (TeacherTbEntity) query.uniqueResult();
+        TeacherTbEntity teacherTbEntity =  (TeacherTbEntity) query.uniqueResult();
+        session.close();
+        return teacherTbEntity;
     }
 
     @Override
     public List<TeacherTbEntity> getTeacherByName(String name) {
         String hql = "from TeacherTbEntity t where t.teacherName like ? ";
-        Query query = sessionFactory.getCurrentSession().createQuery(hql);
+        Session session = sessionFactory.openSession();
+        Query query = session.createQuery(hql);
         query.setParameter(0,"%"+name+"%");
-        return query.list();
+        List list = query.list();
+        session.close();
+        return list;
     }
 
     @Override
     public List<TeacherTbEntity> getAllTeacher() {
         String hql = "from TeacherTbEntity order by teacherId desc";
-        Query query = sessionFactory.getCurrentSession().createQuery(hql);
-        return query.list();
+        Session session = sessionFactory.openSession();
+        Query query = session.createQuery(hql);
+        List list = query.list();
+        session.close();
+        return list;
 
 
     }
 
     @Override
     public void addTeacher(TeacherTbEntity teacher) {
-        sessionFactory.getCurrentSession().persist(teacher);
+        Session session = sessionFactory.openSession();
+        session.persist(teacher);
+        session.close();
     }
 
     @Override
     public void delTeacher(int id) {
         String hql = "delete from TeacherTbEntity s where s.teacherId = ?";
-        Query query = sessionFactory.getCurrentSession().createQuery(hql);
+        Session session = sessionFactory.openSession();
+        Query query = session.createQuery(hql);
         query.setParameter(0, id);
+        session.close();
     }
 
     @Override
     public void updateTeacher(TeacherTbEntity teacher) {
-        sessionFactory.getCurrentSession().update(teacher);
+        Session session = sessionFactory.openSession();
+        session.update(teacher);
     }
 }

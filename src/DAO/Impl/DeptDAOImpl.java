@@ -3,6 +3,7 @@ package DAO.Impl;
 import java.util.List;
 
 import DAO.DeptDAO;
+import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -20,43 +21,58 @@ public class DeptDAOImpl implements DeptDAO {
     @Override
     public DeptTbEntity getDeptByID(int id) {
         String hql = "from DeptTbEntity s where s.deptId = ? ";
-        Query query = sessionFactory.getCurrentSession().createQuery(hql);
+        Session session = sessionFactory.openSession();
+        Query query = session.createQuery(hql);
         query.setParameter(0, id);
-        return (DeptTbEntity) query.uniqueResult();
+        DeptTbEntity deptTbEntity = (DeptTbEntity) query.uniqueResult();
+        session.close();
+        return deptTbEntity;
     }
 
     @Override
     public List<DeptTbEntity> getDeptByName(String name) {
         String hql = "from DeptTbEntity d where d.deptName like ? ";
-        Query query = sessionFactory.getCurrentSession().createQuery(hql);
+        Session session = sessionFactory.openSession();
+        Query query = session.createQuery(hql);
         query.setParameter(0,"%"+name+"%");
-        return query.list();
+        List list = query.list();
+        session.close();
+        return list;
     }
 
     @Override
     public List<DeptTbEntity> getAllDept() {
         String hql = "from DeptTbEntity order by deptId desc";
-        Query query = sessionFactory.getCurrentSession().createQuery(hql);
-        return query.list();
+        Session session = sessionFactory.openSession();
+        Query query = session.createQuery(hql);
+        List list = query.list();
+        session.close();
+        return list;
 
 
     }
 
     @Override
     public void addDept(DeptTbEntity dept) {
-        sessionFactory.getCurrentSession().persist(dept);
+        Session session = sessionFactory.openSession();
+        session.persist(dept);
+        session.close();
     }
 
     @Override
     public void delDept(int id) {
         String hql = "delete from DeptTbEntity s where s.deptId = ?";
-        Query query = sessionFactory.getCurrentSession().createQuery(hql);
+        Session session = sessionFactory.openSession();
+        Query query = session.createQuery(hql);
         query.setParameter(0, id);
+        session.close();
     }
 
     @Override
     public void updateDept(DeptTbEntity dept) {
-        sessionFactory.getCurrentSession().update(dept);
+        Session session = sessionFactory.openSession();
+        session.update(dept);
+        session.close();
     }
 
 }

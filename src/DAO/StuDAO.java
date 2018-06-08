@@ -8,7 +8,7 @@ public interface StuDAO {
 
     StuTbEntity getStuByID(int id);
 
-    List<StuTbEntity> getStuByName(String name);
+    List getStuByName(String name);
 
     List<StuTbEntity> getAllStu();
 

@@ -1,11 +1,9 @@
 package DAO;
 
-import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Example;
 import service.HibernateSession;
-import org.hibernate.criterion.Restrictions;
 
 import java.util.List;
 

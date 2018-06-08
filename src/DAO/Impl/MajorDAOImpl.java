@@ -3,6 +3,7 @@ package DAO.Impl;
 import java.util.List;
 
 import DAO.MajorDAO;
+import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -20,10 +21,13 @@ public class MajorDAOImpl implements MajorDAO {
     }
     @Override
     public MajorTbEntity getMajorByID(int id) {
-        String hql = "from MajorTbEntity s where s.majorId = ? "; 
-       Query query = sessionFactory.getCurrentSession().createQuery(hql); 
-       query.setParameter(0,id); 
-        return (MajorTbEntity) query.uniqueResult(); 
+        String hql = "from MajorTbEntity s where s.majorId = ? ";
+        Session session = sessionFactory.openSession();
+        Query query = session.createQuery(hql);
+        query.setParameter(0,id);
+        MajorTbEntity majorTbEntity = (MajorTbEntity) query.uniqueResult();
+        session.close();
+        return majorTbEntity;
     }
 
 
@@ -31,35 +35,46 @@ public class MajorDAOImpl implements MajorDAO {
     @Override
     public List<MajorTbEntity> getMajorByName(String name) {
         String hql = "from MajorTbEntity m where m.majorName like ? ";
-        Query query = sessionFactory.getCurrentSession().createQuery(hql);
+        Session session = sessionFactory.openSession();
+        Query query = session.createQuery(hql);
         query.setParameter(0,"%"+name+"%");
-        return query.list();
+        List list = query.list();
+        session.close();
+        return list;
 
     }
 
     @Override
     public List<MajorTbEntity> getAllMajor() { 
-        String hql = "from MajorTbEntity order by majorId desc"; 
-        Query query = sessionFactory.getCurrentSession().createQuery(hql); 
-        return query.list(); 
+        String hql = "from MajorTbEntity order by majorId desc";
+        Session session = sessionFactory.openSession();
+        Query query = session.createQuery(hql);
+        List list = query.list();
+        session.close();
+        return list;
 
 
     }
 
     @Override
-    public void addMajor(MajorTbEntity major) { 
-        sessionFactory.getCurrentSession().persist(major); 
+    public void addMajor(MajorTbEntity major) {
+        Session session = sessionFactory.openSession();
+        session.persist(major);
+        session.close();
     }
 
     @Override
     public void delMajor(int id) { 
-       String hql = "delete from MajorTbEntity s where s.majorId = ?"; 
-        Query query = sessionFactory.getCurrentSession().createQuery(hql); 
-        query.setParameter(0,id); 
+       String hql = "delete from MajorTbEntity s where s.majorId = ?";
+       Session session = sessionFactory.openSession();
+       Query query = session.createQuery(hql);
+       query.setParameter(0,id);
+       session.close();
     }
 
     @Override
-    public void updateMajor(MajorTbEntity major) { 
-        sessionFactory.getCurrentSession().update(major); 
+    public void updateMajor(MajorTbEntity major) {
+        Session session = sessionFactory.openSession();
+        session.update(major);
     } 
 }
