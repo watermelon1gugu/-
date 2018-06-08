@@ -3,6 +3,10 @@ package service;
 import java.util.List;
 
 
+import DAO.CourseSelectionDAO;
+import DAO.Impl.CourseSelectionDAOImpl;
+import DAO.Impl.StuDAOImpl;
+import DAO.StuDAO;
 import entity.CourseSelectionTbEntity;
 import org.hibernate.query.Query;
 import org.hibernate.Session;
@@ -73,7 +77,17 @@ public class StudentServiceImpl implements StudentService{
 			//sessionFactory.close();
 		}
 	}
-	
+
+	@Override
+	public void StudentSelectionCourse(int courseId, int stuId) {
+
+		CourseSelectionTbEntity courseSelectionTbEntity = new CourseSelectionTbEntity();
+		courseSelectionTbEntity.setStuId(stuId);
+		courseSelectionTbEntity.setCourseId(courseId);
+		CourseSelectionDAO courseSelectionDAO = new CourseSelectionDAOImpl();
+		courseSelectionDAO.addCourseSelection(courseSelectionTbEntity);
+	}
+
 	/*学生查课，查找自己选的课*/
 	public List<CourseSelectionTbEntity> StudentFindOwnCourse(int stuId) {
 		Session session = null;

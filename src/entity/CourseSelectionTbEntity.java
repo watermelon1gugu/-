@@ -7,7 +7,6 @@ import java.util.Objects;
 @javax.persistence.Table(name = "course_selection_tb", schema = "course_selection_system", catalog = "")
 public class CourseSelectionTbEntity {
     private int stuCourseId;
-
     @javax.persistence.Id
     @javax.persistence.Column(name = "stu_course_id", nullable = false)
     public int getStuCourseId() {

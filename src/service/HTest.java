@@ -1,7 +1,12 @@
 package service;
 
 import DAO.BaseHibernateDAO;
+import DAO.CourseSelectionDAO;
 import DAO.Impl.CourseSelectionDAOImpl;
+import DAO.Impl.MajorDAOImpl;
+import DAO.Impl.StuDAOImpl;
+import DAO.MajorDAO;
+import DAO.StuDAO;
 import entity.ManagerTbEntity;
 import entity.StuTbEntity;
 import entity.TeacherTbEntity;
@@ -32,8 +37,11 @@ public class HTest {
         else System.out.println("input error!");*/
         /*TestService testService = new TestService();
         System.out.println(testService.test());*/
-        CourseSelectionDAOImpl courseSelectionDAO = new CourseSelectionDAOImpl();
+        CourseSelectionDAO courseSelectionDAO = new CourseSelectionDAOImpl();
         System.out.println(courseSelectionDAO.getAllCourseSelection().size());
-
-    }
+        MajorDAO majorDAO = new MajorDAOImpl();
+        System.out.println(majorDAO.getAllMajor().size());
+        StuDAO stuDAO = new StuDAOImpl();
+        System.out.println(stuDAO.getAllStu().size());
+     }
 }
