@@ -4,13 +4,14 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "course_tb", schema = "course_selection_system")
+@Table(name = "course_tb", schema = "Course_Selection_System", catalog = "")
 public class CourseTbEntity {
     private int courseId;
     private String courseName;
     private short courseCredit;
     private short courseTime;
     private short courseLimit;
+    private int courseTeacherId;
 
     @Id
     @Column(name = "course_id", nullable = false)
@@ -62,6 +63,16 @@ public class CourseTbEntity {
         this.courseLimit = courseLimit;
     }
 
+    @Basic
+    @Column(name = "course_teacher_id", nullable = false)
+    public int getCourseTeacherId() {
+        return courseTeacherId;
+    }
+
+    public void setCourseTeacherId(int courseTeacherId) {
+        this.courseTeacherId = courseTeacherId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -71,12 +82,13 @@ public class CourseTbEntity {
                 courseCredit == that.courseCredit &&
                 courseTime == that.courseTime &&
                 courseLimit == that.courseLimit &&
+                courseTeacherId == that.courseTeacherId &&
                 Objects.equals(courseName, that.courseName);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(courseId, courseName, courseCredit, courseTime, courseLimit);
+        return Objects.hash(courseId, courseName, courseCredit, courseTime, courseLimit, courseTeacherId);
     }
 }

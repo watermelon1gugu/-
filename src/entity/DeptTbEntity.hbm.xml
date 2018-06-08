@@ -4,7 +4,7 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="entity.DeptTbEntity" table="dept_tb" schema="course_selection_system">
+    <class name="entity.DeptTbEntity" table="dept_tb" schema="Course_Selection_System">
         <id name="deptId">
             <column name="dept_id" sql-type="int(11)"/>
         </id>

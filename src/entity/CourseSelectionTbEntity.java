@@ -1,14 +1,18 @@
 package entity;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@javax.persistence.Table(name = "course_selection_tb", schema = "course_selection_system", catalog = "")
+@Table(name = "course_selection_tb", schema = "Course_Selection_System", catalog = "")
 public class CourseSelectionTbEntity {
     private int stuCourseId;
-    @javax.persistence.Id
-    @javax.persistence.Column(name = "stu_course_id", nullable = false)
+    private int stuId;
+    private int courseId;
+    private short grade;
+
+    @Id
+    @Column(name = "stu_course_id", nullable = false)
     public int getStuCourseId() {
         return stuCourseId;
     }
@@ -17,10 +21,8 @@ public class CourseSelectionTbEntity {
         this.stuCourseId = stuCourseId;
     }
 
-    private int stuId;
-
-    @javax.persistence.Basic
-    @javax.persistence.Column(name = "stu_id", nullable = false)
+    @Basic
+    @Column(name = "stu_id", nullable = false)
     public int getStuId() {
         return stuId;
     }
@@ -29,10 +31,8 @@ public class CourseSelectionTbEntity {
         this.stuId = stuId;
     }
 
-    private int courseId;
-
-    @javax.persistence.Basic
-    @javax.persistence.Column(name = "course_id", nullable = false)
+    @Basic
+    @Column(name = "course_id", nullable = false)
     public int getCourseId() {
         return courseId;
     }
@@ -41,10 +41,8 @@ public class CourseSelectionTbEntity {
         this.courseId = courseId;
     }
 
-    private short grade;
-
-    @javax.persistence.Basic
-    @javax.persistence.Column(name = "grade", nullable = false)
+    @Basic
+    @Column(name = "grade", nullable = false)
     public short getGrade() {
         return grade;
     }

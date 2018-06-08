@@ -4,4 +4,24 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
+    <class name="entity.CourseTbEntity" table="course_tb" schema="Course_Selection_System">
+        <id name="courseId">
+            <column name="course_id" sql-type="int(11)"/>
+        </id>
+        <property name="courseName">
+            <column name="course_name" sql-type="varchar(45)" length="45"/>
+        </property>
+        <property name="courseCredit">
+            <column name="course_credit" sql-type="smallint(6)"/>
+        </property>
+        <property name="courseTime">
+            <column name="course_time" sql-type="smallint(6)"/>
+        </property>
+        <property name="courseLimit">
+            <column name="course_limit" sql-type="smallint(6)"/>
+        </property>
+        <property name="courseTeacherId">
+            <column name="course_teacher_id" sql-type="int(11)"/>
+        </property>
+    </class>
 </hibernate-mapping>

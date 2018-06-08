@@ -4,10 +4,13 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="entity.MajorTbEntity" table="major_tb" schema="course_selection_system">
+    <class name="entity.MajorTbEntity" table="major_tb" schema="Course_Selection_System">
         <id name="majorId">
             <column name="major_id" sql-type="int(11)"/>
         </id>
+        <property name="deptId">
+            <column name="dept_id" sql-type="int(11)"/>
+        </property>
         <property name="majorName">
             <column name="major_name" sql-type="varchar(45)" length="45"/>
         </property>

@@ -4,9 +4,10 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "major_tb", schema = "course_selection_system")
+@Table(name = "major_tb", schema = "Course_Selection_System", catalog = "")
 public class MajorTbEntity {
     private int majorId;
+    private int deptId;
     private String majorName;
 
     @Id
@@ -17,6 +18,16 @@ public class MajorTbEntity {
 
     public void setMajorId(int majorId) {
         this.majorId = majorId;
+    }
+
+    @Basic
+    @Column(name = "dept_id", nullable = false)
+    public int getDeptId() {
+        return deptId;
+    }
+
+    public void setDeptId(int deptId) {
+        this.deptId = deptId;
     }
 
     @Basic
@@ -35,12 +46,13 @@ public class MajorTbEntity {
         if (o == null || getClass() != o.getClass()) return false;
         MajorTbEntity that = (MajorTbEntity) o;
         return majorId == that.majorId &&
+                deptId == that.deptId &&
                 Objects.equals(majorName, that.majorName);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(majorId, majorName);
+        return Objects.hash(majorId, deptId, majorName);
     }
 }

@@ -80,7 +80,6 @@ public class StudentServiceImpl implements StudentService{
 
 	@Override
 	public void StudentSelectionCourse(int courseId, int stuId) {
-
 		CourseSelectionTbEntity courseSelectionTbEntity = new CourseSelectionTbEntity();
 		courseSelectionTbEntity.setStuId(stuId);
 		courseSelectionTbEntity.setCourseId(courseId);
