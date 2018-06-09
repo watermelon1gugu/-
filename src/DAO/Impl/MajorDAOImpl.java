@@ -76,5 +76,6 @@ public class MajorDAOImpl implements MajorDAO {
     public void updateMajor(MajorTbEntity major) {
         Session session = sessionFactory.openSession();
         session.update(major);
+        session.close();
     } 
 }

@@ -34,34 +34,46 @@ public class ManagerDAOImpl implements ManagerDAO {
     @Override
     public List<ManagerTbEntity> getManagerByName(String name) {
         String hql = "from ManagerTbEntity m where m.managerName like ? ";
-        Query query = sessionFactory.getCurrentSession().createQuery(hql);
+        Session session = sessionFactory.openSession();
+        Query query = session.createQuery(hql);
         query.setParameter(0, "%" + name + "%");
-        return query.list();
+        List list = query.list();
+        session.close();
+        return list;
     }
 
     @Override
     public List<ManagerTbEntity> getAllManager() {
         String hql = "from ManagerTbEntity order by managerId desc";
-        Query query = sessionFactory.getCurrentSession().createQuery(hql);
-        return query.list();
+        Session session = sessionFactory.openSession();
+        Query query = session.createQuery(hql);
+        List list = query.list();
+        session.close();
+        return list;
 
 
     }
 
     @Override
     public void addManager(ManagerTbEntity manager) {
-        sessionFactory.getCurrentSession().persist(manager);
+        Session session = sessionFactory.openSession();
+        session.persist(manager);
+        session.close();
     }
 
     @Override
     public void delManager(int id) {
         String hql = "delete from ManagerTbEntity s where s.managerId = ?";
-        Query query = sessionFactory.getCurrentSession().createQuery(hql);
+        Session session = sessionFactory.openSession();
+        Query query = session.createQuery(hql);
         query.setParameter(0, id);
+        session.close();
     }
 
     @Override
     public void updateManager(ManagerTbEntity manager) {
+        Session session = sessionFactory.openSession();
         sessionFactory.getCurrentSession().update(manager);
+        session.close();
     }
 }

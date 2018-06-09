@@ -16,6 +16,7 @@
         <property name="connection.username">root</property>
         <property name="connection.password">password</property>
 
+
         <mapping resource="entity/CourseSelectionTbEntity.hbm.xml"/>
         <mapping class="entity.CourseSelectionTbEntity"/>
         <mapping resource="entity/CourseTbEntity.hbm.xml"/>

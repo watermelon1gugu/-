@@ -51,6 +51,7 @@ public class StuDAOImpl implements StuDAO {
     public void addStu(StuTbEntity stu) {
         Session session = sessionFactory.openSession();
         session.persist(stu);
+        session.close();
     }
 
     @Override
@@ -66,5 +67,6 @@ public class StuDAOImpl implements StuDAO {
     public void updateStu(StuTbEntity stu) {
         Session session = sessionFactory.openSession();
         session.update(stu);
+        session.close();
     }
 }

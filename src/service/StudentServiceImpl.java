@@ -83,6 +83,7 @@ public class StudentServiceImpl implements StudentService{
 		CourseSelectionTbEntity courseSelectionTbEntity = new CourseSelectionTbEntity();
 		courseSelectionTbEntity.setStuId(stuId);
 		courseSelectionTbEntity.setCourseId(courseId);
+		courseSelectionTbEntity.setGrade((short)0);
 		CourseSelectionDAO courseSelectionDAO = new CourseSelectionDAOImpl();
 		courseSelectionDAO.addCourseSelection(courseSelectionTbEntity);
 	}

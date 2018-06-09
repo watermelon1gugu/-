@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "course_selection_tb", schema = "Course_Selection_System", catalog = "")
+@Table(name = "course_selection_tb", schema = "Course_Selection_System")
 public class CourseSelectionTbEntity {
     private int stuCourseId;
     private int stuId;
@@ -41,8 +41,7 @@ public class CourseSelectionTbEntity {
         this.courseId = courseId;
     }
 
-    @Basic
-    @Column(name = "grade", nullable = false)
+    @Column(name = "grade")
     public short getGrade() {
         return grade;
     }

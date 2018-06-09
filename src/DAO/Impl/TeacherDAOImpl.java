@@ -71,5 +71,6 @@ public class TeacherDAOImpl implements TeacherDAO {
     public void updateTeacher(TeacherTbEntity teacher) {
         Session session = sessionFactory.openSession();
         session.update(teacher);
+        session.close();
     }
 }
