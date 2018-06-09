@@ -4,6 +4,7 @@ import java.util.List;
 
 import DAO.TeacherDAO;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -54,7 +55,9 @@ public class TeacherDAOImpl implements TeacherDAO {
     @Override
     public void addTeacher(TeacherTbEntity teacher) {
         Session session = sessionFactory.openSession();
+        Transaction transaction =session.beginTransaction();
         session.persist(teacher);
+        transaction.commit();
         session.close();
     }
 
@@ -62,15 +65,19 @@ public class TeacherDAOImpl implements TeacherDAO {
     public void delTeacher(int id) {
         String hql = "delete from TeacherTbEntity s where s.teacherId = ?";
         Session session = sessionFactory.openSession();
+        Transaction transaction =session.beginTransaction();
         Query query = session.createQuery(hql);
         query.setParameter(0, id);
+        transaction.commit();
         session.close();
     }
 
     @Override
     public void updateTeacher(TeacherTbEntity teacher) {
         Session session = sessionFactory.openSession();
+        Transaction transaction =session.beginTransaction();
         session.update(teacher);
+        transaction.commit();
         session.close();
     }
 }

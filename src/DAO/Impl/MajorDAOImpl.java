@@ -4,6 +4,7 @@ import java.util.List;
 
 import DAO.MajorDAO;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -59,7 +60,9 @@ public class MajorDAOImpl implements MajorDAO {
     @Override
     public void addMajor(MajorTbEntity major) {
         Session session = sessionFactory.openSession();
+        Transaction transaction =session.beginTransaction();
         session.persist(major);
+        transaction.commit();
         session.close();
     }
 
@@ -67,15 +70,19 @@ public class MajorDAOImpl implements MajorDAO {
     public void delMajor(int id) { 
        String hql = "delete from MajorTbEntity s where s.majorId = ?";
        Session session = sessionFactory.openSession();
+       Transaction transaction =session.beginTransaction();
        Query query = session.createQuery(hql);
        query.setParameter(0,id);
+       transaction.commit();
        session.close();
     }
 
     @Override
     public void updateMajor(MajorTbEntity major) {
         Session session = sessionFactory.openSession();
+        Transaction transaction =session.beginTransaction();
         session.update(major);
+        transaction.commit();
         session.close();
     } 
 }

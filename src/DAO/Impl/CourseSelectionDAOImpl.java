@@ -63,7 +63,9 @@ public class CourseSelectionDAOImpl implements CourseSelectionDAO {
     @Override
     public void updateCourseSelection(CourseSelectionTbEntity courseSelection) {
         Session session = sessionFactory.openSession();
+        Transaction transaction =session.beginTransaction();
         session.update(courseSelection);
+        transaction.commit();
         session.close();
     }
     

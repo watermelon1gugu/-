@@ -6,6 +6,7 @@ import DAO.MajorDAO;
 import DAO.ManagerDAO;
 import entity.MajorTbEntity;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -57,7 +58,9 @@ public class ManagerDAOImpl implements ManagerDAO {
     @Override
     public void addManager(ManagerTbEntity manager) {
         Session session = sessionFactory.openSession();
+        Transaction transaction =session.beginTransaction();
         session.persist(manager);
+        transaction.commit();
         session.close();
     }
 
@@ -65,15 +68,19 @@ public class ManagerDAOImpl implements ManagerDAO {
     public void delManager(int id) {
         String hql = "delete from ManagerTbEntity s where s.managerId = ?";
         Session session = sessionFactory.openSession();
+        Transaction transaction =session.beginTransaction();
         Query query = session.createQuery(hql);
         query.setParameter(0, id);
+        transaction.commit();
         session.close();
     }
 
     @Override
     public void updateManager(ManagerTbEntity manager) {
         Session session = sessionFactory.openSession();
+        Transaction transaction =session.beginTransaction();
         sessionFactory.getCurrentSession().update(manager);
+        transaction.commit();
         session.close();
     }
 }

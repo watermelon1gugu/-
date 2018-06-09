@@ -4,6 +4,7 @@ import DAO.StuDAO;
 import entity.StuTbEntity;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 import java.util.List;
@@ -50,7 +51,9 @@ public class StuDAOImpl implements StuDAO {
     @Override
     public void addStu(StuTbEntity stu) {
         Session session = sessionFactory.openSession();
+        Transaction transaction =session.beginTransaction();
         session.persist(stu);
+        transaction.commit();
         session.close();
     }
 
@@ -58,15 +61,19 @@ public class StuDAOImpl implements StuDAO {
     public void delStu(int id) {
         String hql = "delete from StuTbEntity s where s.stuId = ?";
         Session session = sessionFactory.openSession();
+        Transaction transaction =session.beginTransaction();
         Query query = session.createQuery(hql);
         query.setParameter(0,id);
+        transaction.commit();
         session.close();
     }
 
     @Override
     public void updateStu(StuTbEntity stu) {
         Session session = sessionFactory.openSession();
+        Transaction transaction =session.beginTransaction();
         session.update(stu);
+        transaction.commit();
         session.close();
     }
 }

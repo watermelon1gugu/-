@@ -4,6 +4,7 @@ import java.util.List;
 
 import DAO.DeptDAO;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -55,7 +56,9 @@ public class DeptDAOImpl implements DeptDAO {
     @Override
     public void addDept(DeptTbEntity dept) {
         Session session = sessionFactory.openSession();
+        Transaction transaction =session.beginTransaction();
         session.persist(dept);
+        transaction.commit();
         session.close();
     }
 
@@ -63,15 +66,19 @@ public class DeptDAOImpl implements DeptDAO {
     public void delDept(int id) {
         String hql = "delete from DeptTbEntity s where s.deptId = ?";
         Session session = sessionFactory.openSession();
+        Transaction transaction =session.beginTransaction();
         Query query = session.createQuery(hql);
         query.setParameter(0, id);
+        transaction.commit();
         session.close();
     }
 
     @Override
     public void updateDept(DeptTbEntity dept) {
         Session session = sessionFactory.openSession();
+        Transaction transaction =session.beginTransaction();
         session.update(dept);
+        transaction.commit();
         session.close();
     }
 

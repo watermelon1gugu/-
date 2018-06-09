@@ -4,6 +4,7 @@ import java.util.List;
 
 import DAO.CourseDAO;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -54,7 +55,9 @@ public class CourseDAOImpl implements CourseDAO {
     @Override
     public void addCourse(CourseTbEntity course) {
         Session session = sessionFactory.openSession();
+        Transaction transaction =session.beginTransaction();
         session.persist(course);
+        transaction.commit();
         session.close();
     }
 
@@ -62,15 +65,19 @@ public class CourseDAOImpl implements CourseDAO {
     public void delCourse(int id) {
         String hql = "delete from CourseTbEntity s where s.courseId = ?";
         Session session = sessionFactory.openSession();
+        Transaction transaction =session.beginTransaction();
         Query query = session.createQuery(hql);
         query.setParameter(0, id);
+        transaction.commit();
         session.close();
     }
 
     @Override
     public void updateCourse(CourseTbEntity course) {
         Session session = sessionFactory.openSession();
+        Transaction transaction =session.beginTransaction();
         session.update(course);
+        transaction.commit();
         session.close();
     }
 
